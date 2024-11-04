@@ -1,0 +1,14 @@
+.section{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  .label{
+    margin-bottom: 7px;
+  }
+
+  .input{
+    padding: 5px 10px;
+   
+  }
