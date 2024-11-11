@@ -1,19 +1,16 @@
-import React  from "react";
-import {Route} from 'react-router-dom'
+import React from "react";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/context";
 
-interface Iprop{
-    children: React.ReactNode
+interface Iprop {
+  children: React.ReactNode;
+  restricted?: boolean;
 }
 
-const PublicRouter =({children}: Iprop)=>{
-    const {isLoggedIn} = useAuth()
+const PublicRouter = ({ children, restricted = false }: Iprop) => {
+  const { isLoggedIn } = useAuth();
+  const shouldRedirect = isLoggedIn && restricted;
+  return shouldRedirect ? <Navigate to="/contacts" /> : <>{children}</>;
+};
 
-    return(<Route >
-      
-    </Route>
-        
-    )
-}
-
-
+export default PublicRouter;

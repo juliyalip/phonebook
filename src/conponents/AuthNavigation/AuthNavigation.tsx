@@ -8,7 +8,7 @@ export default function AuthNavigation() {
         <Link to="/registration">Registration</Link>
       </li>
       <li className={styles.item}>
-        <Link to="/login">login</Link>
+        <Link to="/login">Login</Link>
       </li>
     </ul>
   );

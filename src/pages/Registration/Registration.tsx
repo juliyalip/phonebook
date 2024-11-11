@@ -5,6 +5,7 @@ import Form from "../../conponents/Form/Form";
 import InputForm from "../../conponents/InputForm/InputForm";
 import Button from "../../conponents/Button/Button";
 
+
 export default function Registration() {
   const navigate = useNavigate();
   const [name, setName] = useFormValue("");

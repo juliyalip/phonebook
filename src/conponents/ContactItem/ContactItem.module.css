@@ -1,0 +1,12 @@
+.containerItem{
+    padding: 5px 10px;
+    border-bottom: 1px solid gray;
+}
+
+.linkItem{
+    display: flex;
+  }
+
+.numberSection{
+    margin-left: auto;
+}  

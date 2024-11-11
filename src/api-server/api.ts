@@ -1,5 +1,7 @@
 import axios from "axios";
 import { IRegisterUser, IUser } from "../interfaces/user";
+import { AddContact } from "../interfaces/contact";
+import { WASI } from "wasi";
 
 axios.defaults.baseURL = "https://phonebook-api-c3c2.onrender.com/api";
 
@@ -21,7 +23,7 @@ const register = async (user: IRegisterUser) => {
   }
 };
 
-const login = async (user: IUser) => {
+const login = async (user: IRegisterUser) => {
   const { data } = await axios.post("/login", user)
   token.set(data.token)
   return data.token
@@ -42,7 +44,17 @@ const logout = async () => {
   }
 }
 
-const api = { register, login, logout, getCurrentUser }
+const getContacts = async()=>{
+  const response = await axios.get('/contacts')
+  return response
+}
+
+const addContact = async({name, number}: AddContact) =>{
+  const newContact = await axios.post('/contacts' , {name, number});
+  return newContact
+}
+
+const api = { register, login, logout, getCurrentUser , getContacts, addContact}
 export default api
 
 

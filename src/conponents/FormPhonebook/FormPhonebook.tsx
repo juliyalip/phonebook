@@ -2,13 +2,26 @@ import { useFormValue } from "../../hooks/useFormValue";
 import Form from "../Form/Form";
 import InputForm from "../InputForm/InputForm";
 import Button from "../Button/Button";
+import {AddContact } from "../../interfaces/contact";
 
-export default function FormPhonebook() {
+type TSubmit ={
+    addContact:({name ,number}: AddContact)=> void
+}
+
+
+export default function FormPhonebook({addContact}: TSubmit) {
     const [name, setName] = useFormValue("");
     const [number, setNumber] = useFormValue("");
 
+    const handleSubmit=(e: React.FormEvent<HTMLFormElement>): void =>{
+        e.preventDefault();
+        addContact({name, number});
+        setName('');
+        setNumber('')
+    }
+  
     return (
-        <Form onSubmit={() => { }}>
+        <Form onSubmit={handleSubmit}>
             <InputForm
                 htmlFor="name"
                 label="Name"

@@ -7,7 +7,7 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormValue } from "../hooks/useFormValue";
-import { IUser } from "../interfaces/user";
+import { IUser} from "../interfaces/user";
 import api from "../api-server/api";
 
 interface Iprop {
@@ -22,6 +22,7 @@ interface AuthContextType {
   token: string;
   isLoggedIn: boolean;
   loading: boolean;
+
 }
 const defaultAuthContext: AuthContextType = {
   user: null,
@@ -39,7 +40,7 @@ export const AuthProvider = ({ children }: Iprop) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState<IUser | null>(null);
-  const [token, setToken] = useFormValue("");
+  const [token, setToken] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -48,8 +49,8 @@ export const AuthProvider = ({ children }: Iprop) => {
     try {
       const token = window.localStorage.getItem("token");
       if (token) {
-        const result = await api.getCurrentUser();
-        console.log("from fetch current", result);
+        const {data} = await api.getCurrentUser();
+        setUser(data)
         setIsLoggedIn(true);
       }
     } catch (error) {
@@ -61,11 +62,18 @@ export const AuthProvider = ({ children }: Iprop) => {
   };
 
   useEffect(() => {
-    const checkUser = async () => {
-      const data = await fetchCurrentUser();
-      return data;
+    const initializeAuth = async () => {
+      const accessToken = window.localStorage.getItem("token");
+  
+      if (accessToken) {
+        setToken(accessToken); 
+        await fetchCurrentUser();
+      } else {
+        setIsLoggedIn(false);
+      }
     };
-    checkUser();
+    
+    initializeAuth();
   }, []);
 
   const onLogin = async (email: string, password: string) => {
@@ -74,6 +82,7 @@ export const AuthProvider = ({ children }: Iprop) => {
       const response = await api.login({ email, password });
       setToken(response);
       window.localStorage.setItem("token", JSON.stringify(response));
+      await fetchCurrentUser()
       navigate("/contacts");
     } catch (error) {
       console.log(error);
@@ -84,10 +93,10 @@ export const AuthProvider = ({ children }: Iprop) => {
 
   const onLogout = async () => {
     try {
-      const res = await api.logout();
-      console.log(res);
+      await api.logout();
       window.localStorage.removeItem("token");
       setToken("");
+      setUser(null)
       setIsLoggedIn(false);
       navigate("/");
     } catch (error) {
@@ -95,12 +104,6 @@ export const AuthProvider = ({ children }: Iprop) => {
     }
   };
 
-  useEffect(() => {
-    const accessToken = window.localStorage.getItem("token");
-    if (accessToken) {
-      setIsLoggedIn(true);
-    }
-  }, [token]);
 
   return (
     <AuthContext.Provider
@@ -112,3 +115,5 @@ export const AuthProvider = ({ children }: Iprop) => {
 };
 
 export const useAuth = () => useContext(AuthContext);
+
+

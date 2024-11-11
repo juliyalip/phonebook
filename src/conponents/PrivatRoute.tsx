@@ -8,7 +8,7 @@ interface IProp {
 
 const PrivateRoute = ({ children }: IProp) => {
     const { isLoggedIn } = useAuth();
-    console.log(isLoggedIn)
+   
     return isLoggedIn ? <>{children}</> : <Navigate to="/login" replace />
 }
 

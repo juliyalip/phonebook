@@ -1,0 +1,7 @@
+.title{
+    font-size: 1.5rem;
+     text-decoration: none
+}
+.title:not(:last-child){
+    margin-right: 25px;
+}

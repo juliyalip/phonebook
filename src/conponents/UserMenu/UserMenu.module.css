@@ -1,9 +1,9 @@
-.container{
-    display: flex;
-    align-items: center;
-    border: 1px solid black
-}
 
 .greetingText{
     margin-right: 40px;
+}
+
+.logout{
+    padding: 10px 15px;
+    cursor: pointer;
 }

@@ -1,9 +1,9 @@
 
  export interface IUser {
      email: string;
-    password: string;
-  }
+     name?: string;
+    }
   
   export interface IRegisterUser extends IUser {
-    name: string;
+    password: string;
   }

@@ -12,5 +12,7 @@ code {
     monospace;
 }
 
+ul{padding-left: 0;}
+
 li{list-style: none;}
 a {text-decoration: none;}
