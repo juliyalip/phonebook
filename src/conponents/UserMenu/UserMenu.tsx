@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom"
-import { useAuth } from "../../context/context"
+import { useAuth } from "../../context/contextAuth"
 import styles from  './UserMenu.module.css'
 
 export default function UserMenu() {
     const navigate = useNavigate()
-    const {onLogout, user } = useAuth()
+    const { user,onLogout } = useAuth()
+  
     const handleOnClick = () => {
-      onLogout()
+     onLogout()
       navigate('/')
     }
     return (

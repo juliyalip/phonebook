@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-import { useAuth } from '../context/context'
+import { useAuth } from '../context/contextAuth'
 
 interface IProp {
     children: React.ReactNode,

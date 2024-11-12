@@ -1,8 +1,6 @@
-import {useEffect} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import PrivatRoute from './conponents/PrivatRoute';
-import PrivateRoute from './conponents/PrivatRoute';
-import { useAuth } from './context/context';
+import { useAuth } from './context/contextAuth';
 import Layout from './conponents/Layout/Layout';
 import Home from './pages/Home/Home'
 import Registration from './pages/Registration/Registration';
@@ -13,22 +11,22 @@ import './App.css';
 import PublicRouter from './conponents/PublicRoute';
 
 function App() {
- const {isLoggedIn} = useAuth()
- console.log(isLoggedIn)
+  const { isLoggedIn } = useAuth()
+  console.log(isLoggedIn)
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={
-         <PublicRouter>
-          <Home />
-         </PublicRouter>} />
+          <PublicRouter>
+            <Home />
+          </PublicRouter>} />
         <Route path="/registration" element={<PublicRouter restricted><Registration /></PublicRouter>} />
         <Route path="/login" element={<PublicRouter restricted><Login /></PublicRouter>} />
         <Route
           path="/contacts"
           element={
             <PrivatRoute>
-   <Phonebook />
+              <Phonebook />
             </PrivatRoute>
           }
         />

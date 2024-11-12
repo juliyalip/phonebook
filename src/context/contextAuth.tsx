@@ -5,9 +5,10 @@ import {
   useContext,
   useEffect,
 } from "react";
+import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import { useFormValue } from "../hooks/useFormValue";
-import { IUser} from "../interfaces/user";
+import { IUser } from "../interfaces/user";
 import api from "../api-server/api";
 
 interface Iprop {
@@ -19,16 +20,16 @@ interface AuthContextType {
   setUser: (user: IUser) => void;
   onLogin: (email: string, password: string) => void;
   onLogout: () => void;
-  token: string;
+   token: string | null;
   isLoggedIn: boolean;
   loading: boolean;
 
 }
 const defaultAuthContext: AuthContextType = {
   user: null,
-  token: "",
-  setUser: () => {},
-  onLogin: () => {},
+  token: null,
+  setUser: () => { },
+  onLogin: () => { },
   onLogout: () => {},
   isLoggedIn: false,
   loading: false,
@@ -40,70 +41,57 @@ export const AuthProvider = ({ children }: Iprop) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState<IUser | null>(null);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState<string | null>(window.localStorage.getItem("accessToken")|| null);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
+  useEffect((  )=>{
+     const accessToken = window.localStorage.getItem('accessToken')
+     axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`
+    console.log('it is checking from start')
+    if(accessToken){
+      setToken(accessToken)
+      setIsLoggedIn(true)
+    }
+  }, [])
+
   const fetchCurrentUser = async () => {
     setLoading(true);
+    const accessToken =  window.localStorage.getItem('accessToken')
+    setToken(accessToken)
     try {
-      const token = window.localStorage.getItem("token");
       if (token) {
-        const {data} = await api.getCurrentUser();
-        setUser(data)
+        const { data } = await api.getCurrentUser();
+   console.log('data', data)
         setIsLoggedIn(true);
-      }
+      } 
     } catch (error) {
-      console.log(error);
-      onLogout();
+      console.log("Error fetching current user:", error);
+  
     } finally {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    const initializeAuth = async () => {
-      const accessToken = window.localStorage.getItem("token");
-  
-      if (accessToken) {
-        setToken(accessToken); 
-        await fetchCurrentUser();
-      } else {
-        setIsLoggedIn(false);
-      }
-    };
-    
-    initializeAuth();
-  }, []);
 
   const onLogin = async (email: string, password: string) => {
-    setLoading(true);
     try {
-      const response = await api.login({ email, password });
-      setToken(response);
-      window.localStorage.setItem("token", JSON.stringify(response));
+      const accessToken = await api.login({ email, password })
+      window.localStorage.setItem('accessToken', accessToken);
       await fetchCurrentUser()
-      navigate("/contacts");
+      setIsLoggedIn(true)
+      navigate('/contacts')
     } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
+      console.log('error from login', error)
     }
-  };
+  }
 
-  const onLogout = async () => {
-    try {
-      await api.logout();
-      window.localStorage.removeItem("token");
-      setToken("");
-      setUser(null)
-      setIsLoggedIn(false);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
+  const onLogout = () => {
+    window.localStorage.removeItem('accessToken');
+    setToken(null);
+    setUser(null);
+    setIsLoggedIn(false);
+    navigate("/");
   };
-
 
   return (
     <AuthContext.Provider

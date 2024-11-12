@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useFormValue } from "../../hooks/useFormValue";
-import { useAuth } from "../../context/context";
+import { useAuth } from "../../context/contextAuth";
 import Form from "../../conponents/Form/Form";
 import InputForm from "../../conponents/InputForm/InputForm";
 import Button from "../../conponents/Button/Button";
@@ -10,12 +10,12 @@ export default function Login() {
     const [email, setEmail] = useFormValue("");
     const [password, setPassword] = useFormValue("");
 
-    const handleSubmit =  (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         onLogin(email, password)
         setEmail('')
         setPassword('')
-    };
+        };
 
   return (
     <Form onSubmit={handleSubmit}>
