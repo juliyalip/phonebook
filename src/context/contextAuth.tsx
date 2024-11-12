@@ -20,7 +20,7 @@ interface AuthContextType {
   setUser: (user: IUser) => void;
   onLogin: (email: string, password: string) => void;
   onLogout: () => void;
-   token: string | null;
+  token: string | null;
   isLoggedIn: boolean;
   loading: boolean;
 
@@ -30,7 +30,7 @@ const defaultAuthContext: AuthContextType = {
   token: null,
   setUser: () => { },
   onLogin: () => { },
-  onLogout: () => {},
+  onLogout: () => { },
   isLoggedIn: false,
   loading: false,
 };
@@ -41,33 +41,33 @@ export const AuthProvider = ({ children }: Iprop) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState<IUser | null>(null);
-  const [token, setToken] = useState<string | null>(window.localStorage.getItem("accessToken")|| null);
+  const [token, setToken] = useState<string | null>(window.localStorage.getItem("accessToken") || null);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  useEffect((  )=>{
-     const accessToken = window.localStorage.getItem('accessToken')
-     axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`
-    console.log('it is checking from start')
-    if(accessToken){
-      setToken(accessToken)
-      setIsLoggedIn(true)
-    }
+  useEffect(() => {
+    const initializeAuth = async () => {
+      const accessToken = window.localStorage.getItem("accessToken")
+      if (accessToken) {
+        setToken(accessToken)
+        await fetchCurrentUser()
+      } else {
+        await onLogout()
+      }
+    }; initializeAuth()
   }, [])
 
   const fetchCurrentUser = async () => {
     setLoading(true);
-    const accessToken =  window.localStorage.getItem('accessToken')
-    setToken(accessToken)
     try {
       if (token) {
-        const { data } = await api.getCurrentUser();
-   console.log('data', data)
+        axios.defaults.headers.common.Authorization = `Bearer ${token}`
+        const response = await api.getCurrentUser();
+        setUser(response?.data)
         setIsLoggedIn(true);
-      } 
+      }
     } catch (error) {
       console.log("Error fetching current user:", error);
-  
     } finally {
       setLoading(false);
     }

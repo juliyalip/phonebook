@@ -29,8 +29,8 @@ const login = async (user: IRegisterUser) => {
 }
 
 const getCurrentUser = async () => {
-  const result = await axios.get('/current');
-  return result
+    const result = await axios.get('/current');
+    return result
 }
 
 const logout = async () => {
