@@ -1,16 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
-import PrivatRoute from './conponents/PrivatRoute';
+import PrivatRoute from './components/PrivatRoute';
 import { useAuth } from './context/contextAuth';
-import Layout from './conponents/Layout/Layout';
+import Layout from './components/Layout/Layout';
 import Home from './pages/Home/Home'
 import Registration from './pages/Registration/Registration';
 import Login from './pages/Login/Login';
 import Phonebook from './pages/Phonebook/Phonebook';
 import NotFound from './pages/NotFound/NotFound';
 import './App.css';
-import PublicRouter from './conponents/PublicRoute';
+import PublicRouter from './components/PublicRoute';
 
 function App() {
+
   const { isLoggedIn } = useAuth()
   console.log(isLoggedIn)
   return (

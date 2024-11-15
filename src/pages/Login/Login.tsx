@@ -1,9 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import { useFormValue } from "../../hooks/useFormValue";
 import { useAuth } from "../../context/contextAuth";
-import Form from "../../conponents/Form/Form";
-import InputForm from "../../conponents/InputForm/InputForm";
-import Button from "../../conponents/Button/Button";
+import Form from "../../components/Form/Form";
+import InputForm from "../../components/InputForm/InputForm";
+import Button from "../../components/Button/Button";
 
 export default function Login() {
     const { onLogin} = useAuth();

@@ -7,7 +7,6 @@ import {
 } from "react";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
-import { useFormValue } from "../hooks/useFormValue";
 import { IUser } from "../interfaces/user";
 import api from "../api-server/api";
 
@@ -52,7 +51,7 @@ export const AuthProvider = ({ children }: Iprop) => {
         setToken(accessToken)
         await fetchCurrentUser()
       } else {
-        await onLogout()
+         onLogout()
       }
     }; initializeAuth()
   }, [])

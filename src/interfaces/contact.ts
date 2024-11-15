@@ -8,3 +8,4 @@ export interface IContact extends AddContact{
         favorite: boolean,
     _id: string
 }
+

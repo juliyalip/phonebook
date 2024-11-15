@@ -1,11 +1,9 @@
-import React from 'react'
-import Phonebook from '../Phonebook/Phonebook'
+import styles from './Home.module.css'
 
-export default function Home(){
-    return(
-        <div>
-            <h1>Home page</h1>
-       
+
+export default function Home() {
+    return (
+        <div className={styles.baner }>
         </div>
     )
 }

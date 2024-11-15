@@ -1,0 +1,22 @@
+.containerItem{
+    display: flex;
+    padding: 7px 10px;
+    border-bottom: 1px solid gray;
+    justify-content: space-around;
+}
+
+.number{
+    margin-left: 50px;
+}  
+
+.controlSection{
+    display: flex;
+    justify-content: space-between;
+    width: 40px;
+    margin-left: auto;
+}
+
+.basket{
+    cursor: pointer;
+    fill: gray;
+}

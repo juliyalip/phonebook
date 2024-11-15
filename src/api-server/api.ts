@@ -1,6 +1,6 @@
 import axios from "axios";
 import { IRegisterUser, IUser } from "../interfaces/user";
-import { AddContact } from "../interfaces/contact";
+import { AddContact, IContact } from "../interfaces/contact";
 
 axios.defaults.baseURL = "https://phonebook-api-c3c2.onrender.com/api";
 
@@ -57,7 +57,17 @@ const addContact = async({name, number}: AddContact) =>{
   return newContact
 }
 
-const api = { register, login, logout, getCurrentUser , getContacts, addContact}
+const upDateContactProperty = async(id: IContact['_id'], isFavorite:boolean)=>{
+  const update = await axios.patch(`/contacts/${id}/favorite` , {favorite: isFavorite})
+  return update
+}
+
+const deleteContact = async(_id: IContact['_id'] )=>{
+  await axios.delete(`/contacts/${_id}`)
+
+}
+
+const api = { register, login, logout, getCurrentUser , getContacts, addContact, deleteContact, upDateContactProperty}
 export default api
 
 

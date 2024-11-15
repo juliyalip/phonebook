@@ -1,10 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useFormValue } from "../../hooks/useFormValue";
 import api from "../../api-server/api";
-import Form from "../../conponents/Form/Form";
-import InputForm from "../../conponents/InputForm/InputForm";
-import Button from "../../conponents/Button/Button";
-
+import Form from "../../components/Form/Form";
+import InputForm from "../../components/InputForm/InputForm";
+import Button from "../../components/Button/Button";
 
 export default function Registration() {
   const navigate = useNavigate();
@@ -12,12 +11,10 @@ export default function Registration() {
   const [email, setEmail] = useFormValue("");
   const [password, setPassword] = useFormValue("");
 
-
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const result = await api.register({ name, email, password });
+      await api.register({ name, email, password });
       setName("");
       setEmail("");
       setPassword("");

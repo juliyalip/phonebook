@@ -1,0 +1,12 @@
+.baner {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    max-width:  1600px;
+    height: 740px;
+    background-image: 
+      url('../../../public/images/phone.jpg');
+      object-fit: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+   }
