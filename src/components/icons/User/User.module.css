@@ -1,0 +1,17 @@
+.container {
+    display: inline-block;
+    width:  20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: gray;
+    margin-right: 10px;
+    vertical-align: middle; 
+    line-height: 20px; 
+    text-align: center; 
+}
+
+.icon {
+    fill: white;
+    vertical-align: middle; /* Центрирование иконки относительно baseline */
+    display: inline-block; /* Убедимся, что ведет себя корректно */
+}
