@@ -8,14 +8,14 @@ type TSubmit ={
     addContact:({name ,number}: AddContact)=> void
 }
 
-
 export default function FormPhonebook({addContact}: TSubmit) {
     const [name, setName] = useFormValue("");
     const [number, setNumber] = useFormValue("");
 
     const handleSubmit=(e: React.FormEvent<HTMLFormElement>): void =>{
         e.preventDefault();
-        addContact({name, number});
+        const newContact = {name, number: Number(number)}
+        addContact(newContact);
         setName('');
         setNumber('')
     }

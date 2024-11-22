@@ -2,9 +2,17 @@
     display: block;
     border: 1px solid gray;
     border-radius: 4px;
-    padding: 7px 35px;
-    margin: 20px auto 0;
-    background-color: white;
-    box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.16), 0 4px 4px rgba(0, 0, 0, 0.06), 0 1px 1px rgba(0, 0, 0, 0.12)}
+    padding: 10px 45px;
+    margin: 30px auto 0;
+    background-color: gray;
+    color: white
+    }
 
-  
+    .primary{
+        background-color: rgba(0, 0, 0, 0.914);
+        color: white;
+    }
+
+  .base:hover, base:focus{
+box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.16), 0 4px 4px rgba(0, 0, 0, 0.06), 0 1px 1px rgba(0, 0, 0, 0.12)
+  }

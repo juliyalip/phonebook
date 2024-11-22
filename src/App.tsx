@@ -11,9 +11,6 @@ import './App.css';
 import PublicRouter from './components/PublicRoute';
 
 function App() {
-
-  const { isLoggedIn } = useAuth()
-  console.log(isLoggedIn)
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

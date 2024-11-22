@@ -1,11 +1,10 @@
 export interface AddContact{
     name: string,
-    number: string
+    number: number
 }
 
-
 export interface IContact extends AddContact{
-        favorite: boolean,
+    favorite: boolean,
     _id: string
 }
 

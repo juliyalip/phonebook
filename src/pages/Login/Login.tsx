@@ -24,6 +24,7 @@ export default function Login() {
         value={email}
         name="email"
         onChange={setEmail}
+        type="email"
       />
       <InputForm
         htmlFor="password"
