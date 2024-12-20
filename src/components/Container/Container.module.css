@@ -3,13 +3,6 @@
     margin-right: auto;
     padding-left: 15px;
     padding-right: 15px;
-    width: 100%;
+    width: 1200px;
   }
   
-  .medium {
-    width: 600px;
-  }
-  
-  .large{
-      width: 1200px;
-  }

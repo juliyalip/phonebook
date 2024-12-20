@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/contextAuth";
 import Container from "../Container/Container";
 import Navigation from "../Navigation/Navigation";
@@ -11,11 +10,13 @@ export default function AppBar() {
 const { isLoggedIn } = useContext(AuthContext)
 
   return (
-    <Container size="large">
-      <header className={styles.header}>
+    <header>
+    <Container>
+      <div className={styles.headerContainer}>
       <Navigation />
         {isLoggedIn ? <UserMenu /> : <AuthNavigation />}
-      </header>
+      </div>
     </Container>
+    </header>
   );
 }

@@ -3,16 +3,26 @@ import api from "../../api-server/api";
 import { useAuth } from "../../context/contextAuth";
 import FormPhonebook from "../../components/FormPhonebook/FormPhonebook";
 import ContactList from "../../components/ContactList/ContactList";
+import Container from "../../components/Container/Container";
+import Skeleton from "../../components/Skeleton/Skeleton";
 import { AddContact, IContact} from "../../interfaces/contact";
 
 export default function Phonebook() {
   const [contacts, setContacts] = useState<IContact[]>([]);
-  const { loading } = useAuth();
+ const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const getContacts = async () => {
-      const response = await api.getContacts();
-      setContacts(response?.data);
+      setLoading(true)
+      try{
+        const response = await api.getContacts();
+        setContacts(response?.data);
+      }catch(error){
+        console.log(error)
+      }finally{
+        setLoading(false)
+      }
+     
     };
     getContacts();
   }, []);
@@ -35,7 +45,7 @@ export default function Phonebook() {
     }
   }
 
-  const handleUpdateProperty = async(id: string, isFavorite: boolean) =>{
+  const handleUpdateFavorite = async(id: string, isFavorite: boolean) =>{
     try{
       await api.upDateContactProperty(id, isFavorite);
       setContacts(contacts => contacts.map(contact =>{
@@ -50,11 +60,13 @@ export default function Phonebook() {
     }
   }
 
+ 
   return (
-    <div>
-      {loading && <p>Loading...</p>}
+    <Container>
       <FormPhonebook addContact={handleAddContact} />
-  {contacts?.length >0 && <ContactList contacts={contacts} onDelete={handleDeleteContact} onFavorite={handleUpdateProperty}/>}
-    </div>
+      {loading && <Skeleton />}
+      {!loading && contacts?.length >0 && <ContactList contacts={contacts} onDelete={handleDeleteContact} onFavorite={handleUpdateFavorite}/> }
+  
+    </Container>
   );
 }

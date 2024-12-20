@@ -17,11 +17,11 @@
 .controlSection {
     display: flex;
     justify-content: space-between;
-    width: 40px;
-    margin-left: auto;
+      margin-left: auto;
 }
 
 .basket {
     cursor: pointer;
     fill: gray;
+    margin-left: 10px;
 }
