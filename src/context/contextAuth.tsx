@@ -84,7 +84,8 @@ export const AuthProvider = ({ children }: Iprop) => {
     }
   }
 
-  const onLogout = () => {
+  const onLogout = async () => {
+    await api.logout()
     window.localStorage.removeItem('accessToken');
     setToken(null);
     setUser(null);

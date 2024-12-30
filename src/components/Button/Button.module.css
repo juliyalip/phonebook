@@ -1,11 +1,12 @@
 .base{
     display: block;
-    border: 1px solid gray;
-    border-radius: 4px;
-    padding: 10px 45px;
+    border: none;
+    border-radius: 5px;
+    padding: 13px 35px;
     margin: 30px auto 0;
     background-color: gray;
-    color: white
+    color: white;
+    transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
     }
 
     .primary{
@@ -14,5 +15,7 @@
     }
 
   .base:hover, base:focus{
-box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.16), 0 4px 4px rgba(0, 0, 0, 0.06), 0 1px 1px rgba(0, 0, 0, 0.12)
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px); 
+    background-color: grey;
   }

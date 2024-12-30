@@ -1,6 +1,10 @@
 .list{
     display: flex;
-}
+ }
+
+ .item > a {
+    color: black;
+ }
 
 .item:not(:last-child){
     margin-right: 20px;

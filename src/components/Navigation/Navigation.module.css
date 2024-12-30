@@ -1,6 +1,7 @@
 .title{
     font-size: 1.5rem;
-     text-decoration: none
+     text-decoration: none;
+     color: black;
 }
 .title:not(:last-child){
     margin-right: 25px;

@@ -5,18 +5,18 @@
   }
 
   .label{
-    margin-bottom: 7px;
+    margin-bottom: 10px;
       }
 
   .input{
-    padding: 10px 10px;
-    border: 1px solid grey;
-    border-radius: 5px;
-    background-color: rgba(128, 128, 128, 0.151);
+    padding: 7px 10px;
+           border: 1px solid gray;
+           border-radius: 4px;
+           transition: border-color 0.3s easy;
       }
 
   .input:focus{
-   
-   outline: 2px solid rgb(4, 217, 249);
+    border-color: black;
+    outline: none;
   }
 
