@@ -4,12 +4,14 @@ import { useValidationBlur } from "../../hooks/useValidationBlur";
 import { isValidatePassword, isValidateEmail, isValidateName } from "../../validate/validate";
 import api from "../../api-server/api";
 import Form from "../../components/Form/Form";
+import Container from "../../components/Container/Container";
 import InputForm from "../../components/InputForm/InputForm";
 import Button from "../../components/Button/Button";
 import Notification from "../../components/Notification/Notification";
 
 export default function Registration() {
   const navigate = useNavigate();
+
   const [name, setName] = useFormValue("");
   const [email, setEmail] = useFormValue("");
   const [password, setPassword] = useFormValue("");
@@ -32,7 +34,7 @@ export default function Registration() {
     } catch (error) { }
   };
 
-  return (
+  return (<Container>
     <Form onSubmit={handleSubmit}>
       <InputForm
         htmlFor="name"
@@ -65,5 +67,6 @@ export default function Registration() {
       {errorPassword && <Notification message="The password has to be > 4 letters" />}
       <Button>submit</Button>
     </Form>
+    </Container>
   );
 }

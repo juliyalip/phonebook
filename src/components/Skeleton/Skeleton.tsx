@@ -1,6 +1,11 @@
+import Container from '../Container/Container'
 import styles from './Skeleton.module.css'
+
+
 export default function Skeleton(){
-    return(<div className={styles.container}>
+    return(
+    <Container>
+    <div className={styles.container}>
 
       <div className={styles.form}>
 <div className={styles.name}></div>
@@ -17,7 +22,7 @@ export default function Skeleton(){
           </div>
         ))}
       </div>
-
+      </Container>
     )
 }
 

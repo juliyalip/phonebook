@@ -2,8 +2,9 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 15px;
     cursor: pointer;
-    padding: 13px 35px;
+    padding: 10px 35px;
     border-radius: 5px;
     border: none;
     background-color: var(--button-bg-color);
@@ -16,6 +17,13 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
     transform: translateY(-1px); 
     background-color: var(--button-hover-color);
+  }
+
+  @media screen and (min-width: 768px) {
+    .base{
+      padding: 13px 35px;
+    }
+    
   }
 
   @media screen and (min-width: 1200px){

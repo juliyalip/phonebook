@@ -4,6 +4,12 @@
     max-width:600px;
 }
 
+@media screen and (min-width: 768px) {
+    .containerList {
+        width: 400px;
+    }
+}
+
 @media screen and (min-width: 1200px) {
     .containerList{
         width: 600px;
