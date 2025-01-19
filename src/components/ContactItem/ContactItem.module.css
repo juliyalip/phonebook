@@ -1,8 +1,9 @@
 .containerItem {
     display: flex;
     padding: 7px 10px;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--input-border-color);
     justify-content: space-around;
+    align-items: center;
 }
 
 .link {
@@ -24,4 +25,11 @@
     cursor: pointer;
     fill: gray;
     margin-left: 10px;
+}
+
+@media screen and (min-width: 1200px){
+    .containerItem{
+        padding: 7px 15px;
+        font-size: 1.2rem;
+    }
 }

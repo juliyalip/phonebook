@@ -1,31 +1,27 @@
 .baner {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    max-width:  1600px;
-    height: 740px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  max-width: 100%; 
+  height: 215px; 
+  background-image: url('../../../public/images/phone-mobile.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-    background-image:  url('../../../public/images/phone.jpg');
-   background-size: cover;
-   background-position: center;
-   background-repeat: no-repeat;
-   }
+@media screen and (min-width: 768px) {
+  .baner {
+    background-image: url('../../../public/images/phone-tablet.jpg');
+    height: 510px; 
+  }
+}
 
-   @media screen and (min-width: 320px){
-    .baner{
-      width: 100%;
-   
-    }
-   }
+@media screen and (min-width: 1200px) {
+  .baner {
+    width: 1200px;
+     height: 796px;
+    background-image: url('../../../public/images/phone.jpg');
 
-   @media screen and (min-width: 768px){
-    .baner{
-      width: 768px;
-    }
-   }
-
-   @media screen and (min-width: 1200px){
-    .baner{
-      width: 1200px;
-    }
-   }
+  }
+}

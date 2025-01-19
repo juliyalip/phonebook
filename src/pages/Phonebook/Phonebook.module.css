@@ -1,0 +1,13 @@
+.textNotFound{
+    width: 100%;
+    background-color: rgb(212, 208, 208);
+    text-align: center;
+    padding: 10px ;
+    border-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+    .textNotFound{
+        width: 600px;
+    }
+}

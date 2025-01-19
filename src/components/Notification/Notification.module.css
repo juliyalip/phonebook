@@ -2,3 +2,9 @@
     color: red;
     font-size: 0.7rem;
 }
+
+@media screen and (min-width: 1200px){
+    .text{
+        margin-bottom: 15px;
+    }
+}

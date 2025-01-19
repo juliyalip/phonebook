@@ -10,7 +10,7 @@ export default function AppBar() {
 const { isLoggedIn } = useContext(AuthContext)
 
   return (
-    <header>
+    <header className={styles.header}>
     <Container>
       <div className={styles.headerContainer}>
       <Navigation />

@@ -1,21 +1,25 @@
 .base{
-    display: block;
-    border: none;
-    border-radius: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+    cursor: pointer;
     padding: 13px 35px;
-    margin: 30px auto 0;
-    background-color: gray;
-    color: white;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--button-bg-color);
+    color: #ffffff;
     transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
     }
 
-    .primary{
-        background-color: rgba(0, 0, 0, 0.914);
-        color: white;
-    }
-
+  
   .base:hover, base:focus{
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
     transform: translateY(-1px); 
-    background-color: grey;
+    background-color: var(--button-hover-color);
+  }
+
+  @media screen and (min-width: 1200px){
+    .base{
+      margin-top: 20px;
+    }
   }

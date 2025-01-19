@@ -1,29 +1,28 @@
-.skeleton{
-animation: skeletonSpiner 3s linear infinite, changeBorder 3s linear infinite;
+.skeleton {
+    animation: skeletonSpiner 3s linear infinite, changeBorder 3s linear infinite;
 }
 
-
-
-@keyframes skeletonSpiner{
-    0%{
-        background-color: hsl(200, 20%,70%);
+@keyframes skeletonSpiner {
+    0% {
+        background-color: hsl(200, 20%, 70%);
     }
-    100%{
+
+    100% {
         background-color: hsl(200, 20% 95%);
     }
 }
 
-@keyframes changeBorder{
-    0%{
-border-color:  hsl(200, 20%,70%)
+@keyframes changeBorder {
+    0% {
+        border-color: hsl(200, 20%, 70%)
     }
-    100%{
-      border-color:  hsl(200, 20%, 95%);
+
+    100% {
+        border-color: hsl(200, 20%, 95%);
     }
 }
 
-
-.item{
+.item {
     display: flex;
     align-items: center;
     width: 100%;
@@ -32,11 +31,12 @@ border-color:  hsl(200, 20%,70%)
     margin-left: auto;
     margin-right: auto;
     border: 1px solid hsl(200, 20%, 70%);
-animation: changeBorder 3s linear infinite;
+    animation: changeBorder 3s linear infinite;
+    padding: 8px 10px;
 
 }
 
-.avatar{
+.avatar {
     composes: skeleton;
     display: block;
     width: 25px;
@@ -44,9 +44,68 @@ animation: changeBorder 3s linear infinite;
     border-radius: 50%;
 }
 
-.text{
-    composes: skeleton; 
+.text {
+    composes: skeleton;
     width: 100%;
     height: 40%;
     margin-left: 10px;
+}
+
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form {
+    width: 100%;
+    border-radius: 8px;
+    padding: 10px 20px;
+    border: 1px solid hsl(200, 20%, 70%);
+    margin-left: auto;
+    margin-right: auto;
+    animation: changeBorder 3s linear infinite;
+
+}
+
+.name {
+    composes: skeleton;
+    width: 100%;
+    height: 25px;
+}
+
+.number {
+    composes: skeleton;
+    width: 100%;
+    height: 25px;
+}
+
+.button{
+    composes: skeleton;
+    width: 150px;
+    height: 20px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+@media screen and (min-width: 768px) {
+    .form {
+        width: 400px;
+        margin-bottom: 20px;
+        padding-top: 45px;
+    }
+
+    .name {
+        height: 30px;
+        margin-bottom: 45px;
+    }
+    .number{
+        height: 30px;
+        margin-bottom: 35px;
+    }
+.button{
+    height: 35px;
+}
 }

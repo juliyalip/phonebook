@@ -1,7 +1,7 @@
 .section{
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
   }
 
   .label{
@@ -10,13 +10,13 @@
 
   .input{
     padding: 7px 10px;
-           border: 1px solid gray;
+           border: 1px solid var(--input-border-color);
            border-radius: 4px;
            transition: border-color 0.3s easy;
       }
 
   .input:focus{
-    border-color: black;
+    border-color: var(--input-focus-color);
     outline: none;
   }
 

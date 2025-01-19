@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormValue } from "../../hooks/useFormValue";
-import { validatePassword, validateEmail } from "../../validate/validate";
+import { useValidationBlur } from "../../hooks/useValidationBlur";
+import { isValidatePassword, isValidateEmail, isValidateName } from "../../validate/validate";
 import api from "../../api-server/api";
 import Form from "../../components/Form/Form";
 import InputForm from "../../components/InputForm/InputForm";
@@ -13,18 +13,11 @@ export default function Registration() {
   const [name, setName] = useFormValue("");
   const [email, setEmail] = useFormValue("");
   const [password, setPassword] = useFormValue("");
-  const [error, setErrorPassword] = useState<boolean>(false)
+  const [errorName, setErrorName] = useValidationBlur(isValidateName)
+  const [errorEmail, setErrorEmail] = useValidationBlur(isValidateEmail)
+  const [errorPassword, setErrorPassword] = useValidationBlur(isValidatePassword)
 
-  const onBlur = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { value } = e.target;
-    if (!!validatePassword(value)) {
-      setErrorPassword(true)
-      setTimeout(() => {
-        setErrorPassword(false)
-      }, 3000)
-      setErrorPassword(true)
-    }
-  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email || !password) {
@@ -47,16 +40,19 @@ export default function Registration() {
         value={name}
         name="name"
         onChange={setName}
+        onBlur={setErrorName}
       />
+      {errorName && <Notification message="The name has to be more 2 letters" />}
       <InputForm
         htmlFor="email"
-        label="Email"
+        label="E-mail"
         value={email}
         name="email"
+        onBlur={setErrorEmail}
         onChange={setEmail}
         type="email"
       />
-
+      {errorEmail && <Notification message="The email is not valid" />}
       <InputForm
         htmlFor="password"
         type="password"
@@ -64,9 +60,9 @@ export default function Registration() {
         value={password}
         name="password"
         onChange={setPassword}
-        onBlur={onBlur}
+        onBlur={setErrorPassword}
       />
-      {error && <Notification message="The password has to be > 4 letters" />}
+      {errorPassword && <Notification message="The password has to be > 4 letters" />}
       <Button>submit</Button>
     </Form>
   );

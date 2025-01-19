@@ -1,0 +1,11 @@
+:root {
+   --primary-background-color: #fafafa;
+    --primary-text-color:  #212121;
+
+    --form-background-color: #ffffff;
+    --form-border-color: #e0e0e0;
+    --input-border-color: #cccccc;
+    --input-focus-color: #000000;
+    --button-bg-color: #333333;
+    --button-hover-color: #555555;
+  }
