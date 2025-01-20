@@ -1,9 +1,22 @@
+.container{
+margin-left: auto;
+}
 
 .greetingText{
-    margin-right: 40px;
+  display: none;
 }
 
 .logout{
-    padding: 10px 15px;
-    cursor: pointer;
+     cursor: pointer;
+     font-size: 0.9rem;
+}
+
+@media screen and (min-width: 768px) {
+    .greetingText{
+        display: inline-block;
+        margin-right: 40px;
+    }
+    .logout{
+        font-size: 1rem;
+   }
 }

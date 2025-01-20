@@ -1,11 +1,13 @@
 .list{
     display: flex;
- }
+    margin-left: auto;
+   }
 
  .item > a {
-    color: black;
+    color: var(--primary-text-color);
  }
 
 .item:not(:last-child){
     margin-right: 20px;
 }
+
