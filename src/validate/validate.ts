@@ -11,3 +11,8 @@ export function isValidateEmail(value: string) {
   export function isValidateName(value: string){
     return value.length > 2
   }
+
+  export function isValidNumber(phoneNumber: string){
+    const isValid =  /^(\+?\d{1,4}[\s-]?)?\(?\d{1,4}\)?[\s-]?\d{5,}$/;
+    return isValid.test(phoneNumber)}
+
