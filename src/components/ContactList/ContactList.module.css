@@ -4,6 +4,25 @@
     max-width:600px;
 }
 
+
+.fadeEnter {
+    opacity: 0;
+    transform: translateY(10px);
+}
+.fadeEnterActive {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+.fadeExit {
+    opacity: 1;
+}
+.fadeExitActive {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+
 @media screen and (min-width: 768px) {
     .containerList {
         width: 400px;

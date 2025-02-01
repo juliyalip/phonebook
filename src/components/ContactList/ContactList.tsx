@@ -1,3 +1,4 @@
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { IContact } from '../../interfaces/contact'
 import ContactItem from '../ContactItem/Contact'
 import styles from './ContactList.module.css'
@@ -9,10 +10,15 @@ interface IProps {
 }
 
 export default function ContactList({ contacts, onDelete , onFavorite}: IProps) {
-    return (<ul className={styles.containerList}>
+    return (<TransitionGroup component="ul" className={styles.containerList}>
         {contacts.map(contact => (
+             <CSSTransition
+             key={contact._id}
+             timeout={300}
+             classNames={styles.fade}   unmountOnExit>
             <ContactItem key={contact._id} {...contact} onDelete={()=>onDelete(contact._id)} onFavorite={()=>{onFavorite(contact._id, contact.favorite)}}/>
+            </CSSTransition>
         ))}
-    </ul>
+    </TransitionGroup>
     )
 }
