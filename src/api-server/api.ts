@@ -1,8 +1,10 @@
 import axios from "axios";
-import { IRegisterUser, IUser } from "../interfaces/user";
+import { IRegisterUser } from "../interfaces/user";
 import { AddContact, IContact } from "../interfaces/contact";
 
-axios.defaults.baseURL = "https://phonebook-api-c3c2.onrender.com/api";
+  axios.defaults.baseURL = "https://phonebook-api-c3c2.onrender.com/api";
+
+//  axios.defaults.baseURL = "http://localhost:8800/api/";
 
 const token = {
   set(token: string) {
@@ -31,6 +33,11 @@ const login = async (user: IRegisterUser) => {
 const getCurrentUser = async () => {
     const result = await axios.get('/current');
     return result
+}
+
+const changeAvatar = async(avatar: FormData) =>{
+  const result = await axios.patch('/upload', avatar)
+  return result
 }
 
 const logout = async () => {
@@ -67,7 +74,7 @@ const deleteContact = async(_id: IContact['_id'] )=>{
 
 }
 
-const api = { register, login, logout, getCurrentUser , getContacts, addContact, deleteContact, upDateContactProperty}
+const api = { register, login, logout, getCurrentUser , changeAvatar, getContacts, addContact, deleteContact, upDateContactProperty}
 export default api
 
 

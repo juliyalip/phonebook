@@ -1,5 +1,7 @@
 .textNotFound{
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     background-color: rgb(212, 208, 208);
     text-align: center;
     padding: 10px ;

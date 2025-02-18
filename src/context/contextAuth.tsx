@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useState,
-  ReactNode,
-  useContext,
-  useEffect,
-} from "react";
+import {  createContext,  useState,  ReactNode,  useContext,  useEffect } from "react";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../interfaces/user";
@@ -22,12 +16,13 @@ interface AuthContextType {
   token: string | null;
   isLoggedIn: boolean;
   loading: boolean;
-
+updateAvatar: (value: FormData)=> void
 }
 const defaultAuthContext: AuthContextType = {
   user: null,
   token: null,
   setUser: () => { },
+updateAvatar: () => {},
   onLogin: () => { },
   onLogout: () => { },
   isLoggedIn: false,
@@ -40,49 +35,9 @@ export const AuthProvider = ({ children }: Iprop) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState<IUser | null>(null);
-  const [token, setToken] = useState<string | null>(window.localStorage.getItem("accessToken") || null);
+  const [token, setToken] = useState<string | null>(() => window.localStorage.getItem("accessToken") || null );  
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    const initializeAuth = async () => {
-      const accessToken = window.localStorage.getItem("accessToken")
-      if (accessToken) {
-        setToken(accessToken)
-        await fetchCurrentUser()
-      } else {
-         onLogout()
-      }
-    }; initializeAuth()
-  }, [])
-
-  const fetchCurrentUser = async () => {
-    setLoading(true);
-    try {
-      if (token) {
-        axios.defaults.headers.common.Authorization = `Bearer ${token}`
-        const response = await api.getCurrentUser();
-        setUser(response?.data)
-        setIsLoggedIn(true);
-      }
-    } catch (error) {
-      console.log("Error fetching current user:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const onLogin = async (email: string, password: string) => {
-    try {
-      const accessToken = await api.login({ email, password })
-      window.localStorage.setItem('accessToken', accessToken);
-      await fetchCurrentUser()
-      setIsLoggedIn(true)
-      navigate('/contacts')
-    } catch (error) {
-      console.log('error from login', error)
-    }
-  }
 
   const onLogout = async () => {
     await api.logout()
@@ -91,11 +46,80 @@ export const AuthProvider = ({ children }: Iprop) => {
     setUser(null);
     setIsLoggedIn(false);
     navigate("/");
-  };
+  }
+
+useEffect(() => {
+  const accessToken = window.localStorage.getItem("accessToken");
+
+  if (!accessToken) {
+    api.logout().then(() => {
+      window.localStorage.removeItem("accessToken");
+      setToken(null);
+      setUser(null);
+      setIsLoggedIn(false);
+
+    });
+  } else {
+    setToken(accessToken);
+  }
+},[] ); 
+
+
+  useEffect(()=>{
+    if (!token) return; 
+       const fetchCurrentUser = async () => {
+      setLoading(true);
+      try {
+        if (token) {
+          axios.defaults.headers.common.Authorization = `Bearer ${token}`
+          const response = await api.getCurrentUser();
+          console.log('from fetch current: ', response.data)
+          setUser(response?.data)
+          setIsLoggedIn(true);
+          navigate('/contacts')
+        }
+      } catch (error) {
+        console.log("Error fetching current user:", error);
+      } finally {
+        setLoading(false);
+      }
+    }; if(token){
+      fetchCurrentUser()
+    }
+
+  }, [token , navigate])
+
+const updateAvatar = async(value: FormData) =>{
+  try{
+    const {data } = await api.changeAvatar(value);
+    
+    setUser((prevUser) => 
+      prevUser ? { ...prevUser, avatar: data.avatar} : null
+    );
+   
+
+  }catch(error){
+    console.log(error)
+  }
+}
+  
+  const onLogin = async (email: string, password: string) => {
+    try {
+      const accessToken = await api.login({ email, password })
+      window.localStorage.setItem('accessToken', accessToken);
+setToken(accessToken)
+         setIsLoggedIn(true)
+      navigate('/contacts')
+    } catch (error) {
+      console.log('error from login', error)
+    }
+  }
+
+
 
   return (
     <AuthContext.Provider
-      value={{ user, token, isLoggedIn, loading, setUser, onLogin, onLogout }}
+      value={{ user, token, isLoggedIn, loading, setUser, onLogin, onLogout, updateAvatar }}
     >
       {children}
     </AuthContext.Provider>

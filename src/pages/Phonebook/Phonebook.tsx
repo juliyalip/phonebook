@@ -29,8 +29,8 @@ export default function Phonebook() {
     getContacts();
   }, []);
 
-  const isNotData = Boolean(contacts.length === 0);
-  const filteredContacts = contacts.filter(contact => contact.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase()))
+ 
+  const filteredContacts = contacts?.filter(contact => contact.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase()))
 
   const handleAddContact = async (contact: AddContact) => {
     try {
@@ -76,7 +76,9 @@ export default function Phonebook() {
     <Container>
       {loading && <Skeleton />}
       {!loading && <FormPhonebook addContact={handleAddContact} />}
-      {!loading && isNotData && <p className={styles.textNotFound} >You don't have contacts</p>}
+      {!loading && contacts?.length === 0 && (
+  <p className={styles.textNotFound}>You don't have contacts</p>
+)}
       {!loading && contacts?.length > 0 && <Filter value={filter} onFilter={handleFilter} />}
       {!loading && contacts?.length > 0 && <ContactList contacts={filteredContacts} onDelete={handleDeleteContact} onFavorite={handleUpdateFavorite} />}
 
