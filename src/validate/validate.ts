@@ -1,5 +1,5 @@
 export const isValidatePassword = (str: string): boolean=>{
-    return str.length > 3
+    return /^[a-zA-Z0-9]+$/.test(str) && str.length > 3;
 }
 
 export function isValidateEmail(value: string) {

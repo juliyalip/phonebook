@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios , { AxiosError } from "axios";
 import { IRegisterUser } from "../interfaces/user";
 import { AddContact, IContact } from "../interfaces/contact";
 
@@ -20,7 +20,10 @@ const register = async (user: IRegisterUser) => {
     const data = await axios.post("/register", user);
     return data
   } catch (error) {
-    console.log(error)
+    if (error instanceof AxiosError && error.response?.status === 409) {
+      throw error; 
+    }
+    throw error; 
   }
 };
 

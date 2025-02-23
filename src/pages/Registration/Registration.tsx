@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { AxiosError } from 'axios';
 import { useFormValue } from "../../hooks/useFormValue";
 import { useValidationBlur } from "../../hooks/useValidationBlur";
 import { isValidatePassword, isValidateEmail, isValidateName } from "../../validate/validate";
@@ -31,7 +32,12 @@ export default function Registration() {
       setEmail("");
       setPassword("");
       navigate("/login");
-    } catch (error) { }
+    } catch (error) { 
+      if (error instanceof AxiosError && error.response?.status === 409) {
+        alert("This email is already registered"); 
+        return; 
+      }
+    }
   };
 
   return (<Container>
